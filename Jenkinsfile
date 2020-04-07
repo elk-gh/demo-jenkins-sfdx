@@ -5,7 +5,7 @@ node {
     def BUILD_NUMBER=env.BUILD_NUMBER
     def RUN_ARTIFACT_DIR="tests/${BUILD_NUMBER}"
     def SFDC_USERNAME
-    def DEPLOYDIR='src'
+    def DEPLOYDIR='src/.'
     def TEST_LEVEL='RunLocalTests'
 
     def HUB_ORG=env.HUB_ORG_DH
@@ -56,7 +56,7 @@ node {
 	// -------------------------------------------------------------------------
 	    stage('Deploy and Run Tests') {
 			if (isUnix()) {
-				rmsg = sh returnStdout: true, script: "${toolbelt} force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
+				rmsg = sh returnStdout: true, script: "${toolbelt} force:mdapi:deploy -d src/. -u ${HUB_ORG}"
 			}else{
 			   rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR}  --targetusername ${HUB_ORG} --testlevel ${TEST_LEVEL}"
 			}
