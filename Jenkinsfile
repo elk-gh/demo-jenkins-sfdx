@@ -58,7 +58,7 @@ node {
 			if (isUnix()) {
 				rmsg = sh returnStdout: true, script: "${toolbelt} force:mdapi:deploy -d manifest/. -u ${HUB_ORG}"
 			}else{
-			   rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR}  --testlevel ${TEST_LEVEL}"
+			   rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR}  --targetusername ${HUB_ORG} --testlevel ${TEST_LEVEL}"
 			}
 		if (rmsg != 0) {
 			error 'Salesforce deploy and test run failed.'
