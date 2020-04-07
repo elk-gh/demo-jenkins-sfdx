@@ -5,5 +5,9 @@
     <members>MyClass</members>
     <members>MyTest</members>
   </types>
-  <version>44.0</version>
+      <types>
+        <members>Curso__c</members>
+        <name>CustomObject</name>
+    </types>
+  <version>45.0</version>
 </Package>
