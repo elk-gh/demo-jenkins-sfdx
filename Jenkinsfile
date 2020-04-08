@@ -1,30 +1,28 @@
 #!groovy
 import groovy.json.JsonSlurperClassic
 node {
-
-    def BUILD_NUMBER=env.BUILD_NUMBER
-    def RUN_ARTIFACT_DIR="tests/${BUILD_NUMBER}"
-    def SFDC_USERNAME
-    def DEPLOYDIR='src/.'
+	
+    def SF_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
+    def SF_USERNAME=env.HUB_ORG_DH
+    def SERVER_KEY_CREDENTIALS_ID=env.JWT_CRED_ID_DH
+    def DEPLOYDIR='src'
     def TEST_LEVEL='RunLocalTests'
+    def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://test.salesforce.com"
 
-    def HUB_ORG=env.HUB_ORG_DH
-    def SFDC_HOST = env.SFDC_HOST_DH
-    def JWT_KEY_CRED_ID = env.JWT_CRED_ID_DH
-    def CONNECTED_APP_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
 
+    def toolbelt = tool 'toolbelt'
+	
     println 'KEY IS' 
-    println JWT_KEY_CRED_ID
-    println HUB_ORG
-    println SFDC_HOST
-    println CONNECTED_APP_CONSUMER_KEY
+    println SERVER_KEY_CREDENTIALS_ID
+    println SF_USERNAME
+    println SF_INSTANCE_URL
+    println SF_CONSUMER_KEY
     def toolbelt = tool 'toolbelt'
 
     // -------------------------------------------------------------------------
     // Check out code from source control.
     // -------------------------------------------------------------------------
     stage('checkout source') {
-        // when running in multi-branch job, one must issue this command
         checkout scm
     }
 
@@ -33,39 +31,37 @@ node {
     // JWT key credentials.
     // -------------------------------------------------------------------------
 	
-    withCredentials([file(credentialsId: JWT_KEY_CRED_ID, variable: 'jwt_key_file')]) {
+    withCredentials([file(credentialsId: SERVER_KEY_CREDENTIALS_ID, variable: 'server_key_file')]) {
 
 		
 	// -------------------------------------------------------------------------
 	// Authenticate to Salesforce using the server key.
 	// -------------------------------------------------------------------------
-	stage('Authorize to Salesforce') {	
-            if (isUnix()) {
-                rc = sh returnStatus: true, script: "${toolbelt} force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile ${jwt_key_file} --setdefaultdevhubusername --instanceurl ${SFDC_HOST}"
-            }else{
-                 rc = bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${CONNECTED_APP_CONSUMER_KEY} --username ${HUB_ORG} --jwtkeyfile \"${jwt_key_file}\" --setdefaultdevhubusername --instanceurl ${SFDC_HOST}"
-            }
-            if (rc != 0) { error 'hub org authorization failed' }
-	
-		println rc
+	stage('Authorize to Salesforce') {
+		rc = command "${toolbelt}/sfdx force:auth:jwt:grant --instanceurl ${SF_INSTANCE_URL} --clientid ${SF_CONSUMER_KEY} --jwtkeyfile ${server_key_file} --username ${SF_USERNAME} --setalias UAT"
+	    if (rc != 0) {
+		error 'Salesforce org authorization failed.'
+	    }
 	}
 		
 		
 	// -------------------------------------------------------------------------
 	// Deploy metadata and execute unit tests.
 	// -------------------------------------------------------------------------
-	    stage('Deploy and Run Tests') {
-			if (isUnix()) {
-				rmsg = sh returnStdout: true, script: "${toolbelt} force:mdapi:deploy -d src/. -u ${HUB_ORG}"
-			}else{
-			   rmsg = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy -d src/. -u ${HUB_ORG}"
-			}
-		if (rmsg != 0) {
-			error 'Salesforce deploy and test run failed.'
-		}
-			  
-            println rmsg
-        }
+	stage('Deploy and Run Tests') {
+	    rc = command "${toolbelt}/sfdx force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} --targetusername UAT --testlevel ${TEST_LEVEL}"
+	    if (rc != 0) {
+		error 'Salesforce deploy and test run failed.'
+	    }
+	}
+    }
+}
+
+def command(script) {
+    if (isUnix()) {
+        return sh(returnStatus: true, script: script);
+    } else {
+		return bat(returnStatus: true, script: script);
     }
 }
 
