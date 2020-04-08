@@ -39,7 +39,7 @@ node {
 	// Authenticate to Salesforce using the server key.
 	// -------------------------------------------------------------------------
 	stage('Authorize to Salesforce') {
-        rb = bat returnStatus: true, script: "\"${toolbelt}\" sfdx force:auth:logout --username ${SF_USERNAME}"
+        rb = bat returnStatus: true, script: "\"${toolbelt}\" force:auth:logout --username ${SF_USERNAME}"
         if (rb != 0) {
 		error 'Salesforce org logout failed.'
 	    }
