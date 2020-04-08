@@ -40,7 +40,7 @@ node {
 	// -------------------------------------------------------------------------
 	stage('Authorize to Salesforce') {
         rb = bat returnStatus: true, script: "\"${toolbelt}\" sfdx force:auth:logout --username ${SF_USERNAME}"
-        if (rc != 0) {
+        if (rb != 0) {
 		error 'Salesforce org logout failed.'
 	    }
 		rc = bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}"
