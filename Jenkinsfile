@@ -37,7 +37,7 @@ node {
 	// Authenticate to Salesforce using the server key.
 	// -------------------------------------------------------------------------
 	stage('Authorize to Salesforce') {
-		rc = bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL} --setalias DEV"
+		rc = bat returnStatus: true, script: "\"${toolbelt}\" force:auth:jwt:grant --clientid ${SF_CONSUMER_KEY} --username ${SF_USERNAME} --jwtkeyfile \"${server_key_file}\" --setdefaultdevhubusername --instanceurl ${SF_INSTANCE_URL}"
 	    if (rc != 0) {
 		error 'Salesforce org authorization failed.'
 	    }
@@ -48,7 +48,7 @@ node {
 	// Deploy metadata and execute unit tests.
 	// -------------------------------------------------------------------------
 	stage('Deploy and Run Tests') {
-	    rc = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} --targetusername DEV --testlevel ${TEST_LEVEL}"
+	    rc = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} --u ${SF_USERNAME} --testlevel ${TEST_LEVEL}"
 	    if (rc != 0) {
 		error 'Salesforce deploy and test run failed.'
 	    }
