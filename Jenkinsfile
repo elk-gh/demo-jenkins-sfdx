@@ -48,7 +48,7 @@ node {
 	// Deploy metadata and execute unit tests.
 	// -------------------------------------------------------------------------
 	stage('Deploy and Run Tests') {
-	    rc = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy -u ${SF_USERNAME}"
+	    rc = bat returnStdout: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} --targetusername UAT --testlevel ${TEST_LEVEL}"
 	    if (rc != 0) {
 		error 'Salesforce deploy and test run failed.'
 	    }
