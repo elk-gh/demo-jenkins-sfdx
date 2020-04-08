@@ -43,18 +43,18 @@ node {
 	    if (rc != 0) {
 		error 'Salesforce org authorization failed.'
 	    }
-	}
+	//}
 		
 		
 	// -------------------------------------------------------------------------
 	// Deploy metadata and execute unit tests.
 	// -------------------------------------------------------------------------
-	stage('Deploy and Run Tests') {
-	    rc = bat returnStatus: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${SF_USERNAME} --testlevel ${TEST_LEVEL}"
-	    if (rc != 0) {
+	//stage('Deploy and Run Tests') {
+	    rp = bat returnStatus: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${SF_USERNAME} --testlevel ${TEST_LEVEL}"
+	    if (rp != 0) {
 		error 'Salesforce deploy and test run failed.'
 	    }
-	}
+	//}
     }
     }
 }
