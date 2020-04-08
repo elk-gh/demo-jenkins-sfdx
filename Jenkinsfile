@@ -54,7 +54,7 @@ node {
 	    if (rp != 0) {
 		error 'Salesforce deploy and test run failed.'
 	    }
-	//}
+	}
     }
     }
 }
