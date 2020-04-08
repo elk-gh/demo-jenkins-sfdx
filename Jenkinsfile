@@ -17,7 +17,6 @@ node {
     println SF_USERNAME
     println SF_INSTANCE_URL
     println SF_CONSUMER_KEY
-    def toolbelt = tool 'toolbelt'
 
     // -------------------------------------------------------------------------
     // Check out code from source control.
