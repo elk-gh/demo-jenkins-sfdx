@@ -5,7 +5,7 @@ node {
     def SF_CONSUMER_KEY=env.CONNECTED_APP_CONSUMER_KEY_DH
     def SF_USERNAME=env.HUB_ORG_DH
     def SERVER_KEY_CREDENTIALS_ID=env.JWT_CRED_ID_DH
-    def DEPLOYDIR='src'
+    def DEPLOYDIR='manifest'
     def TEST_LEVEL='RunLocalTests'
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://test.salesforce.com"
 
