@@ -95,7 +95,7 @@
     - Jenkins --> New Item
     - Definir un nombre
     - Seleccionar Categoria Multibrach PipeLine
-    - Branch sources --> Seleccionar Adicionar un item
+    - Branch sources --> Seleccionar Adicionar un item (TODO)
     - Single repository & branch --> Indicar la URL del repositorio
     - Especificar la rama si es requerido
     - Guardar 
