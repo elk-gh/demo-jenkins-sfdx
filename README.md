@@ -102,14 +102,10 @@
   ```  
 - Ir a la pestaña del Item creado
 - En la lista que aparece dar click en el nombre del ultimo build
-- Selecionar la opcion "Build Now" en la iquierda
-  ```
-    Console outPut (Se evidencia que no se puede obtener la variable de entorno)
-  ```  
 - Reinciar el equipo
 - Retornar a Jenkins
 - Ir al repositorio 
-- Selecionar la opcion "Build Now" --> Console OutPut
+- Selecionar la opcion "Build Now"
 
 TODO:
 -Toolbet
