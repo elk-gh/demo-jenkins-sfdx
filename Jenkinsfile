@@ -6,6 +6,7 @@ node {
     def SF_USERNAME=env.HUB_ORG_DH
     def SERVER_KEY_CREDENTIALS_ID=env.JWT_CRED_ID_DH
     def DEPLOYDIR='manifest'
+    def DESTRUCTIVEDIR='destructivePackage'
     def TEST_LEVEL='RunLocalTests'
     def SF_INSTANCE_URL = env.SFDC_HOST_DH ?: "https://test.salesforce.com"
 
@@ -52,7 +53,7 @@ node {
 	// Deploy metadata and execute unit tests.
 	// -------------------------------------------------------------------------
 	stage('Deploy and Run Tests') {
-	    rp = bat returnStatus: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} -u ${SF_USERNAME} --testlevel ${TEST_LEVEL}"
+	    rp = bat returnStatus: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DEPLOYDIR} --targetusername ${SF_USERNAME} --testlevel ${TEST_LEVEL}"
 	    if (rp != 0) {
 		error 'Salesforce deploy and test run failed.'
 	    }
@@ -62,7 +63,7 @@ node {
 	// Delete metadata for preparing to demo deployment.
 	// -------------------------------------------------------------------------
 	stage('Delete Metadata') {
-	    rp = bat returnStatus: true, script: "\"${toolbelt}\" force:source:delete --sourcepath ${DEPLOYDIR}"
+	    rp = bat returnStatus: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DESTRUCTIVEDIR} --targetusername ${SF_USERNAME} -testlevel ${TEST_LEVEL} --wait -1"
 	    if (rp != 0) {
 		error 'Salesforce delete metadata failed.'
 	    }
