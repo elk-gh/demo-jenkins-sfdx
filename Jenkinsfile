@@ -63,7 +63,7 @@ node {
 	// Delete metadata for preparing to demo deployment.
 	// -------------------------------------------------------------------------
 	stage('Delete Metadata') {
-	    rp = bat returnStatus: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DESTRUCTIVEDIR} --targetusername ${SF_USERNAME} -testlevel ${TEST_LEVEL} --wait -1"
+	    rp = bat returnStatus: true, script: "\"${toolbelt}\" force:mdapi:deploy --wait 10 --deploydir ${DESTRUCTIVEDIR} --targetusername ${SF_USERNAME} --testlevel ${TEST_LEVEL} --wait -1"
 	    if (rp != 0) {
 		error 'Salesforce delete metadata failed.'
 	    }
