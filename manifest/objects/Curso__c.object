@@ -52,6 +52,16 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
+    <gender>Feminine</gender>
+    <label>Curso</label>
+    <nameField>
+        <label>Curso Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Cursos</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+    <visibility>Public</visibility>
     <fields>
         <fullName>Creditos__c</fullName>
         <externalId>false</externalId>
@@ -63,19 +73,9 @@
         <type>Number</type>
         <unique>false</unique>
     </fields>
-    <gender>Feminine</gender>
-    <label>Curso</label>
     <listViews>
         <fullName>All</fullName>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
-    <nameField>
-        <label>Curso Name</label>
-        <type>Text</type>
-    </nameField>
-    <pluralLabel>Cursos</pluralLabel>
-    <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
-    <visibility>Public</visibility>
 </CustomObject>
