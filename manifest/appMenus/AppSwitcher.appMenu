@@ -45,11 +45,19 @@
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
+        <name>standard__LightningSalesConsole</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__LightningService</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
         <name>standard__LightningSales</name>
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
-        <name>standard__LightningBolt</name>
+        <name>standard__LightningInstrumentation</name>
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
@@ -57,6 +65,22 @@
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
+        <name>standard__LightningScheduler</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>standard__LightningBolt</name>
+        <type>CustomApplication</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>DEVHUB_ofrorykxbywvjdtehynl</name>
+        <type>ConnectedApp</type>
+    </appMenuItems>
+    <appMenuItems>
+        <name>Jenkins</name>
+        <type>ConnectedApp</type>
+    </appMenuItems>
+	<appMenuItems>
         <name>Demo_Jenkins</name>
         <type>CustomApplication</type>
     </appMenuItems>
