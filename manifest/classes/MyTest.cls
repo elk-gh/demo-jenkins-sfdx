@@ -10,6 +10,6 @@ private class MyTest {
         MyClass mc = new MyClass();
         Test.stopTest();
 
-        System.assertEquals(2, mc.classes.size());
+        System.assertEquals(5, mc.classes.size());
     }
 }
