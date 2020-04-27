@@ -81,10 +81,6 @@
 		<type>CustomApplication</type>
 	</appMenuItems>
 	<appMenuItems>
-		<name>Forcecom_Migration_Tool</name>
-		<type>ConnectedApp</type>
-	</appMenuItems>
-	<appMenuItems>
 		<name>Salesforce_Mobile_Dashboards</name>
 		<type>ConnectedApp</type>
 	</appMenuItems>
