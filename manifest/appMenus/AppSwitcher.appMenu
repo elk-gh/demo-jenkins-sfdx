@@ -81,10 +81,6 @@
 		<type>CustomApplication</type>
 	</appMenuItems>
 	<appMenuItems>
-		<name>Dataloader_Bulk</name>
-		<type>ConnectedApp</type>
-	</appMenuItems>
-	<appMenuItems>
 		<name>Dataloader_Partner</name>
 		<type>ConnectedApp</type>
 	</appMenuItems>
