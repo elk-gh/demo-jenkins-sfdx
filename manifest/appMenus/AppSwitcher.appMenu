@@ -73,10 +73,6 @@
         <type>CustomApplication</type>
     </appMenuItems>
     <appMenuItems>
-        <name>DEVHUB_ofrorykxbywvjdtehynl</name>
-        <type>ConnectedApp</type>
-    </appMenuItems>
-    <appMenuItems>
         <name>Jenkins</name>
         <type>ConnectedApp</type>
     </appMenuItems>
