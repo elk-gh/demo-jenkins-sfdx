@@ -81,10 +81,6 @@
 		<type>CustomApplication</type>
 	</appMenuItems>
 	<appMenuItems>
-		<name>Salesforce_Touch</name>
-		<type>ConnectedApp</type>
-	</appMenuItems>
-	<appMenuItems>
 		<name>Salesforce_for_Outlook</name>
 		<type>ConnectedApp</type>
 	</appMenuItems>
